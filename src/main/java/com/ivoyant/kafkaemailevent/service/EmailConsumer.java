@@ -7,6 +7,7 @@ import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.mail.SimpleMailMessage;
@@ -22,12 +23,14 @@ public class EmailConsumer {
 
     private final JavaMailSender emailSender;
 
+
     @Autowired
     public EmailConsumer(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
 
-    @KafkaListener(topics = "email-event", groupId = "group2")
+
+    @KafkaListener(topics = "${spring.kafka.listener.topics.email-event}", groupId = "${spring.kafka.consumer.group-id}")
     public void consumeMessage(EmailDto emailDto) {
         LOGGER.info("Message from topic: {}", emailDto.toString());
 
@@ -35,7 +38,7 @@ public class EmailConsumer {
         sendEmail(emailDto);
     }
 
-    @KafkaListener(topics = "email-attach-event", groupId = "group2")
+    @KafkaListener(topics = "${spring.kafka.listener.topics.email-attach-event}", groupId = "${spring.kafka.consumer.group-id}")
     public void consumeMessageWithAttachment(EmailAttachDto emailAttachDto) {
         LOGGER.info("Message from the topic:{}", emailAttachDto.toString());
         try {

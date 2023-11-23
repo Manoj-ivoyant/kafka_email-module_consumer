@@ -13,3 +13,8 @@ spring:
           json:
             trusted:
               packages: com.ivoyant.kafkaemailevent.dto
+    listener:
+      topics:
+        email-event: email-event
+        email-attach-event: email-attach-event
+

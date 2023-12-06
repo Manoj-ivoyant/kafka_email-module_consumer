@@ -3,11 +3,11 @@ package com.ivoyant.kafkaemailevent.dto;
 import lombok.Data;
 
 /**
- * Data Transfer Object (DTO) representing an email.
- * This class encapsulates the details of an email message.
+ * Data Transfer Object (DTO) representing an email with an attachment.
+ * This class encapsulates the details of an email message with an attachment.
  */
 @Data
-public class EmailDto {
+public class EmailAttachDto {
 
     /**
      * The sender's email address.
@@ -28,6 +28,11 @@ public class EmailDto {
      * The body content of the email.
      */
     private String body;
+
+    /**
+     * The file path or location of the attachment.
+     */
+    private String attachment;
 
     /**
      * Retrieves the sender's email address.
@@ -99,5 +104,23 @@ public class EmailDto {
      */
     public void setBody(String body) {
         this.body = body;
+    }
+
+    /**
+     * Retrieves the file path or location of the attachment.
+     *
+     * @return A String representing the attachment's file path or location.
+     */
+    public String getAttachment() {
+        return attachment;
+    }
+
+    /**
+     * Sets the file path or location of the attachment.
+     *
+     * @param attachment The attachment's file path or location to be set.
+     */
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
     }
 }
